@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> /*set the CSS here*/
+
+body {
+  font: 10px sans-serif;
+}
+
+path.line { 
+	stroke: black;
+	stroke-width: 2;
+	stroke-dasharray:5,9;
+	fill: none;
+}
+
+
+.axis path,
+
+.axis line {
+	fill: none;
+	stroke: black;
+	stroke-width: 1;
+	shape-rendering: crispEdges;
+}
+
+
+path.area{
+    fill:steelblue;
+}
+
+path.area1{
+	fill:steelblue;
+	opacity: 0.4;
+
+}
+
+
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var gifted = d3.select("body")
+	            .append("div")
+				.style("position","absolute")
+				.style("z-index","10")
+				.style("visibility","visible")
+				.text("A Gifted Program");
+
+
+
+
+//set the time format for the Xaxis
+var format = d3.time.format("%Y");
+//var percentage = d3.percentage("%");
+
+	d3.csv("TestData.csv",function(data){
+		data.forEach(function(d){
+		d.fiscal_year = format.parse(d.fiscal_year);
+		d.fiscal_year = d.fiscal_year;
+		//d.gifted_black = percentage.parse(d.gifted_black);
+		d.black_total = d.black_total;
+
+	});
+
+//set the dimension of the graph
+var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    width = 500 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+//set the ranges 
+var x = d3.time.scale().range([0,width]);
+var y = d3.scale.linear().range([height,0]);
+
+
+
+//define the axes 
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+var formatter = d3.format(".0%");
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5).tickFormat(formatter);
+
+//create the line 
+var valueline = d3.svg.line()
+			    .x(function(d){return x(d.fiscal_year);})
+			    .y(function(d){return y(d.gifted_black);});
+    
+var valueline1 = d3.svg.line()
+			    .x(function(d){return x(d.fiscal_year);})
+			    .y(function(d){return y(d.black_total);});
+
+//creat the area
+var area = d3.svg.area()
+           .x(function(d){return x(d.fiscal_year);})
+           .y0(y.range()[0])
+           .y1(function(d) {return y(d.gifted_black);});
+
+var area1 = d3.svg.area()
+           .x(function(d){return x(d.fiscal_year);})
+           .y0(y.range()[0])
+           .y1(function(d) {return y(d.black_total);});
+//var area = d3.svg.area()
+//           .x(function(d) {return x(d.fiscal_year);})
+//           .y0(height)
+//           .y1(function(d) {return y(d.gifted_black);});
+
+//add the svg canvas
+var svg = d3.select("body")
+		    .append("svg")
+            .datum(data)
+            .attr("width",width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("class","time chart")
+		    .append("g")
+            .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+//get the raw data
+
+
+
+	//scale the range of the data 
+	x.domain(d3.extent(data,function(d){return d.fiscal_year;}));
+	y.domain([0,d3.max(data,function(d){return d.black_total;})]).nice();
+
+	//add the valueline path
+
+    
+    //svg.append("path")
+	//          .attr("class","line")
+	//          .attr("d",valueline1(data));
+
+	//draw the scatterplot for the gifted_black
+    svg.append("path")
+	   .attr("class","area")
+	   .attr("d",area);
+
+    svg.append("path")
+	   .attr("class","area1")
+	   .attr("d",area1);
+
+
+	svg.selectAll("dot")
+	         .data(data)
+	.enter().append("circle")
+	        .attr("r",3)
+	        .attr("cx",function(d) {return x(d.fiscal_year);})
+	        .attr("cy",function(d) {return y(d.gifted_black);})
+			.on("mouseover", function(d){
+		gifted.text(d.gifted_black);
+		return gifted.style("visibility","visible");
+	})
+	.on("mousemove",function(){return gifted.style("top",(event.pageY-10)+"py").style("left",(event.pageX+10)+"py");})
+	.on("mouseout",function(){return gifted.style("visibility","hidden");});
+    
+    //draw the scatterplot for the black_total
+    svg.selectAll("dot")
+	         .data(data)
+	.enter().append("circle")
+	        .attr("r",3)
+	        .attr("cx",function(d) {return x(d.fiscal_year);})
+	        .attr("cy",function(d) {return y(d.black_total);})
+	.on("mouseover", function(d){
+		gifted.text(d.black_total);
+		return gifted.style("visibility","visible");
+	})
+	.on("mousemove",function(){return gifted.style("top",(event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+	.on("mouseout",function(){return gifted.style("visibility","hidden");});
+   
+	//add the X Axis
+	svg.append("g")
+	           .attr("class","x axis")
+	           .attr("transform","translate(0," + y.range()[0] + ")")
+	           .call(xAxis);
+	//add the Y Axis
+	svg.append("g")
+	           .attr("class","y axis")
+	           //.attr("transform","translate(" + x.range()[1] + ")")
+	           .call(yAxis);
+
+
+	//draw the area
+
+
+	svg.append("path")
+	          .attr("class","line")
+	          .attr("d",valueline(data))
+	          .on("mouseover",function(d){
+	          	gifted.text(d.gifted_black);
+	          	return gifted.style("visibility","visible");
+	          });
+    
+    svg.append("path")
+	          .attr("class","line")
+	          .attr("d",valueline1(data));
+
+
+});
+
+
+</script>
+</body>

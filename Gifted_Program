@@ -9,6 +9,13 @@ body {
 path.line { 
 	stroke: black;
 	stroke-width: 2;
+	fill: none;
+}
+
+
+path.line1 { 
+	stroke: black;
+	stroke-width: 2;
 	stroke-dasharray:5,9;
 	fill: none;
 }
@@ -23,6 +30,9 @@ path.line {
 	shape-rendering: crispEdges;
 }
 
+dot.circle{
+	fill:steelblue;
+}
 
 path.area{
     fill:steelblue;
@@ -146,6 +156,7 @@ var svg = d3.select("body")
 	         .data(data)
 	.enter().append("circle")
 	        .attr("r",3)
+	        .attr("class","circle")
 	        .attr("cx",function(d) {return x(d.fiscal_year);})
 	        .attr("cy",function(d) {return y(d.gifted_black);})
 			.on("mouseover", function(d){
@@ -186,14 +197,11 @@ var svg = d3.select("body")
 
 	svg.append("path")
 	          .attr("class","line")
-	          .attr("d",valueline(data))
-	          .on("mouseover",function(d){
-	          	gifted.text(d.gifted_black);
-	          	return gifted.style("visibility","visible");
-	          });
+	          .attr("d",valueline(data));
+	 
     
     svg.append("path")
-	          .attr("class","line")
+	          .attr("class","line1")
 	          .attr("d",valueline1(data));
 
 

@@ -17,21 +17,67 @@ path.line1 {
 	stroke: black;
 	stroke-width: 2;
 	stroke-dasharray:5,9;
-	fill: none;
+	
 }
+
+.dot{
+	fill:white;
+	stroke:black;
+	cursor: pointer;
+	stroke-width: 2;
+}
+
 
 
 .axis path,
 
+.d3-tip{
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis path {
+  display: none;
+}
+
 .axis line {
 	fill: none;
-	stroke: black;
-	stroke-width: 1;
+	stroke: #000;
 	shape-rendering: crispEdges;
 }
 
-dot.circle{
-	fill:steelblue;
+path.circle{
+	fill: green;
+	stroke: #444;
+	stroke-width: 5px;
+
 }
 
 path.area{
@@ -49,6 +95,7 @@ path.area1{
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <script>
 
 var gifted = d3.select("body")
@@ -93,6 +140,22 @@ var formatter = d3.format(".0%");
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(5).tickFormat(formatter);
 
+//add the tip method
+var tip = d3.tip()
+          .attr("class","d3-tip")
+          .offset([-10,0])
+          .html(function(d){
+          	return "<span style = 'color:red'>" + d.gifted_black + "</span>";
+          });
+
+
+var tip1 = d3.tip()
+          .attr("class","d3-tip")
+          .offset([-10,0])
+          .html(function(d){
+          	return "<span style = 'color:red'>" + d.black_total + "</span>";
+          });
+
 //create the line 
 var valueline = d3.svg.line()
 			    .x(function(d){return x(d.fiscal_year);})
@@ -129,7 +192,8 @@ var svg = d3.select("body")
 
 //get the raw data
 
-
+svg.call(tip);
+svg.call(tip1);
 
 	//scale the range of the data 
 	x.domain(d3.extent(data,function(d){return d.fiscal_year;}));
@@ -151,36 +215,16 @@ var svg = d3.select("body")
 	   .attr("class","area1")
 	   .attr("d",area1);
 
-
-	svg.selectAll("dot")
-	         .data(data)
-	.enter().append("circle")
-	        .attr("r",3)
-	        .attr("class","circle")
-	        .attr("cx",function(d) {return x(d.fiscal_year);})
-	        .attr("cy",function(d) {return y(d.gifted_black);})
-			.on("mouseover", function(d){
-		gifted.text(d.gifted_black);
-		return gifted.style("visibility","visible");
-	})
-	.on("mousemove",function(){return gifted.style("top",(event.pageY-10)+"py").style("left",(event.pageX+10)+"py");})
-	.on("mouseout",function(){return gifted.style("visibility","hidden");});
+	svg.append("path")
+	    .attr("class","line")
+	    .attr("d",valueline(data));
+	 
     
-    //draw the scatterplot for the black_total
-    svg.selectAll("dot")
-	         .data(data)
-	.enter().append("circle")
-	        .attr("r",3)
-	        .attr("cx",function(d) {return x(d.fiscal_year);})
-	        .attr("cy",function(d) {return y(d.black_total);})
-	.on("mouseover", function(d){
-		gifted.text(d.black_total);
-		return gifted.style("visibility","visible");
-	})
-	.on("mousemove",function(){return gifted.style("top",(event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-	.on("mouseout",function(){return gifted.style("visibility","hidden");});
-   
-	//add the X Axis
+    svg.append("path")
+	    .attr("class","line1")
+        .attr("d",valueline1(data));
+
+    //add the X Axis
 	svg.append("g")
 	           .attr("class","x axis")
 	           .attr("transform","translate(0," + y.range()[0] + ")")
@@ -192,18 +236,44 @@ var svg = d3.select("body")
 	           .call(yAxis);
 
 
-	//draw the area
-
-
-	svg.append("path")
-	          .attr("class","line")
-	          .attr("d",valueline(data));
-	 
+	//draw the point 
+	svg.selectAll("dot")
+	        .data(data)
+			.enter().append("circle")
+	        .attr("r",5)
+	        .attr("class","dot")
+	        //.attr("stroke","black")
+	        //.attr('fill','#fff')
+	        .attr("cx",function(d) {return x(d.fiscal_year);})
+	        .attr("cy",function(d) {return y(d.gifted_black);})
+			.on('mouseover', tip.show)
+			.on('mouseout',tip.hide);
     
-    svg.append("path")
-	          .attr("class","line1")
-	          .attr("d",valueline1(data));
+    //draw the scatterplot for the black_total
+	svg.selectAll("dot")
+	        .data(data)
+			.enter().append("circle")
+	        .attr("r",5)
+	        .attr("class","dot")
+	        //.attr("stroke","black")
+	        //.attr('fill','#fff')
+	        .attr("cx",function(d) {return x(d.fiscal_year);})
+	        .attr("cy",function(d) {return y(d.black_total);})
+			.on('mouseover', tip1.show)
+			.on('mouseout',tip1.hide);
+   
+//show the data when hovering on the dot
+function showData(dot, it){
 
+  
+    d3.select(dot)
+    .transition()
+    .duration(200)
+    .attr("r", 7);
+}
+
+
+	//draw the area
 
 });
 

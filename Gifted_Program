@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<html>
+<title>Gifted Program</title> 
+<link href="css/myajc.css" rel="stylesheet" type="text/css" media="screen"/>
+<h1> Gifted Program</h1>
 <meta charset="utf-8">
 <style> /*set the CSS here*/
 
@@ -89,13 +93,67 @@ path.area1{
 	opacity: 0.4;
 
 }
+#linegs {
+  padding: 10px 0;
+}
 
+.line-graph{
+  display: inline-block;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+#black_line{
+	width: 500px;
+	padding-right: 50px;
+	padding-left: 300px;
+}
+
+#minority_line{
+	width: 500px;
+}
+
+#Gap{
+	width: 100px;
+	font: 15px sans-serif;
+	position: absolute;
+	top: 150px;
+}
+#introdcution{
+    display: inline;
+	font: 20px sans-serif;
+	text-align: center;
+	position: relative;
+	top: 20px;
+}
 
 
 </style>
-<body>
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<body>
+<div id = "linegs">
+	<div id = "introdcution" class = "line-graph">
+		Atlanta Public Schools
+		<div id = "buttons">
+		<button><input id = "Gap" value = "Gaped">See the gap</button>
+	</div>
+	</div>
+	<div id = "black_line" class = "line-graph">
+		<div class = "title">Gifted-Balck VS. Black-Totle</div>
+	</div>
+	<div id = "black_line" class = "line-graph">
+		<div class = "title">Gifted-Minority VS. Minority-Totle</div>
+	</div>	
+	
+</div>
+<form>
+  <label><input type="radio" name="mode" value="Gaped"> Grouped</label>
+  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+</form>
+
 <script>
 
 var gifted = d3.select("body")
@@ -104,9 +162,6 @@ var gifted = d3.select("body")
 				.style("z-index","10")
 				.style("visibility","visible")
 				.text("A Gifted Program");
-
-
-
 
 //set the time format for the Xaxis
 var format = d3.time.format("%Y");
@@ -123,8 +178,8 @@ var format = d3.time.format("%Y");
 
 //set the dimension of the graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50},
-    width = 500 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    width = 360 - margin.left - margin.right,
+    height = 240 - margin.top - margin.bottom;
 
 //set the ranges 
 var x = d3.time.scale().range([0,width]);
@@ -145,7 +200,7 @@ var tip = d3.tip()
           .attr("class","d3-tip")
           .offset([-10,0])
           .html(function(d){
-          	return "<span style = 'color:red'>" + d.gifted_black + "</span>";
+          	return "<span style = 'color:red'>" + d.gifted_minority + "</span>";
           });
 
 
@@ -153,42 +208,75 @@ var tip1 = d3.tip()
           .attr("class","d3-tip")
           .offset([-10,0])
           .html(function(d){
-          	return "<span style = 'color:red'>" + d.black_total + "</span>";
+          	return "<span style = 'color:red'>" + d.minority_total + "</span>";
           });
+
+var svg = d3.select("#black_line")
+		    .append("svg")
+            .datum(data)
+            .attr("width",width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("class","line graph")
+		    .append("g")
+            .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
 //create the line 
 var valueline = d3.svg.line()
 			    .x(function(d){return x(d.fiscal_year);})
-			    .y(function(d){return y(d.gifted_black);});
+			    .y(function(d){return y(d.gifted_minority);});
+//change of the value when clicking the button
+var path = svg.append("g")
+              .append("path")
+              .data(data)
+              .attr("class","line")
+              .attr("d",valueline)
+var lineTran = path
+              .attr("d", valueline)
+              .attr("transform", null)
+
+
+
+lineTran.transition()
+     .delay(function(d,i){return i * 10 ;})
+     .attr("y", function(d){return y(d.minority_total - d.gifted_minority);});
+
+//Test Transition
+d3.selectAll("input").on("change",change);
+
+function change(){
+	if(gap === "Gaped") transition();
+	console.log("The change function is used!!!!");
+}
+
+function transition(){
+    graph.selectAll("path")
+           .data(newData)
+        .transition()
+            .duration(2000)
+            .attr("d", valueline(newData));
+}
     
 var valueline1 = d3.svg.line()
 			    .x(function(d){return x(d.fiscal_year);})
-			    .y(function(d){return y(d.black_total);});
+			    .y(function(d){return y(d.minority_total);});
 
 //creat the area
 var area = d3.svg.area()
            .x(function(d){return x(d.fiscal_year);})
            .y0(y.range()[0])
-           .y1(function(d) {return y(d.gifted_black);});
+           .y1(function(d) {return y(d.gifted_minority);});
 
 var area1 = d3.svg.area()
            .x(function(d){return x(d.fiscal_year);})
            .y0(y.range()[0])
-           .y1(function(d) {return y(d.black_total);});
+           .y1(function(d) {return y(d.minority_total);});
 //var area = d3.svg.area()
 //           .x(function(d) {return x(d.fiscal_year);})
 //           .y0(height)
 //           .y1(function(d) {return y(d.gifted_black);});
 
 //add the svg canvas
-var svg = d3.select("body")
-		    .append("svg")
-            .datum(data)
-            .attr("width",width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .attr("class","time chart")
-		    .append("g")
-            .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
 
 //get the raw data
 
@@ -197,7 +285,7 @@ svg.call(tip1);
 
 	//scale the range of the data 
 	x.domain(d3.extent(data,function(d){return d.fiscal_year;}));
-	y.domain([0,d3.max(data,function(d){return d.black_total;})]).nice();
+	y.domain([0,d3.max(data,function(d){return d.minority_total;})]).nice();
 
 	//add the valueline path
 
@@ -215,16 +303,6 @@ svg.call(tip1);
 	   .attr("class","area1")
 	   .attr("d",area1);
 
-	svg.append("path")
-	    .attr("class","line")
-	    .attr("d",valueline(data));
-	 
-    
-    svg.append("path")
-	    .attr("class","line1")
-        .attr("d",valueline1(data));
-
-    //add the X Axis
 	svg.append("g")
 	           .attr("class","x axis")
 	           .attr("transform","translate(0," + y.range()[0] + ")")
@@ -234,6 +312,18 @@ svg.call(tip1);
 	           .attr("class","y axis")
 	           //.attr("transform","translate(" + x.range()[1] + ")")
 	           .call(yAxis);
+	
+	svg.append("path")
+	    .attr("class","line")
+	    .attr("d",valueline(data));
+	 
+    
+    //svg.append("path")
+	//   .attr("class","line1")
+    //    .attr("d",valueline1(data));
+
+    //add the X Axis
+
 
 
 	//draw the point 
@@ -245,7 +335,7 @@ svg.call(tip1);
 	        //.attr("stroke","black")
 	        //.attr('fill','#fff')
 	        .attr("cx",function(d) {return x(d.fiscal_year);})
-	        .attr("cy",function(d) {return y(d.gifted_black);})
+	        .attr("cy",function(d) {return y(d.gifted_minority);})
 			.on('mouseover', tip.show)
 			.on('mouseout',tip.hide);
     
@@ -258,7 +348,7 @@ svg.call(tip1);
 	        //.attr("stroke","black")
 	        //.attr('fill','#fff')
 	        .attr("cx",function(d) {return x(d.fiscal_year);})
-	        .attr("cy",function(d) {return y(d.black_total);})
+	        .attr("cy",function(d) {return y(d.minority_total);})
 			.on('mouseover', tip1.show)
 			.on('mouseout',tip1.hide);
    
@@ -271,12 +361,27 @@ function showData(dot, it){
     .duration(200)
     .attr("r", 7);
 }
-
-
-	//draw the area
-
 });
+
+//see the animation of gap button
+var gap = document.getElementById("Gap").value;
+console.log(gap);
+
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
+</html>

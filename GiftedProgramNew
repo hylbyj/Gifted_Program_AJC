@@ -11,8 +11,9 @@ body {
 }
 
 .y.axisLeft text {
-    fill: steelblue;
+    fill: black;
 }
+
 
 .axis path,
 .axis line {
@@ -25,7 +26,7 @@ body {
   line-height: 1;
   font-weight: bold;
   padding: 12px;
-  background: #98abc5;
+  background: #000;
   color: steelblue;
   border-radius: 2px;
 }
@@ -36,7 +37,7 @@ body {
   font-size: 10px;
   width: 100%;
   line-height: 1;
-  color: #fff;
+  color: steelblue;
   content:"\25BC";
   position: absolute;
   text-align: center;
@@ -75,13 +76,204 @@ form {
 
 <form>
   <label><input type="radio" name="mode" value="2010" checked > 2010</label> 
-  <label><input type="radio" name="mode" value="2011" checked> 2011</label>
-  <label><input type="radio" name="mode" value="2012" checked> 2012</label>
-  <label><input type="radio" name="mode" value="2013" checked> 2013</label>
+  <label><input type="radio" name="mode" value="2011" > 2011</label>
+  <label><input type="radio" name="mode" value="2012" > 2012</label>
+  <label><input type="radio" name="mode" value="2013" > 2013</label>
+  <label><input type = "button" name="mode" id ="gap" value="gap"></label>
 </form>
-
-
 <script>
+
+var data_2010 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581,
+"black_gap":0.286700528},
+
+{"SYSTEM_NAME":"Buford City",
+"black_total": 0.138528139,
+"gifted_total":0.025568182,
+"black_gap":0.286700528},
+
+{"SYSTEM_NAME":"Cherokee County",
+"black_total": 0.069355356,
+"gifted_total":0.025225225,
+"black_gap":0.286700528},
+
+{"SYSTEM_NAME":"Clayton County",
+"black_total": 0.721180996,
+"gifted_total":0.641369048},
+
+{"SYSTEM_NAME":"Cobb County",
+"black_total": 0.31152851,
+"gifted_total":0.115574436},
+
+{"SYSTEM_NAME":"Decatur City",
+"black_total": 0.339034588,
+"gifted_total":0.095818815},
+
+{"SYSTEM_NAME":"DeKalb County",
+"black_total": 0.721604578,
+"gifted_total":0.475733634},
+
+{"SYSTEM_NAME":"Douglas County",
+"black_total": 0.475266378,
+"gifted_total":0.31161025},
+
+{"SYSTEM_NAME":"Fayette County",
+"black_total": 0.227673367,
+"gifted_total":0.09950361},
+
+{"SYSTEM_NAME":"Forsyth County",
+"black_total": 0.024195919,
+"gifted_total":0.008933086},
+
+{"SYSTEM_NAME":"Fulton County",
+"black_total": 0.418474298,
+"gifted_total":0.150644142},
+
+{"SYSTEM_NAME":"Gwinnett County",
+"black_total": 0.279337524,
+"gifted_total":0.132466604},
+
+{"SYSTEM_NAME":"Henry County",
+"black_total": 0.450703526,
+"gifted_total":0.271347678},
+
+{"SYSTEM_NAME":"Marietta City",
+"black_total": 0.452160085,
+"gifted_total":0.208504801},
+
+{"SYSTEM_NAME":"Rockdale County",
+"black_total": 0.587196614,
+"gifted_total":0.374331551},
+
+]
+
+var data_2011 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.793406229,
+"gifted_total":0.512226239},
+
+{"SYSTEM_NAME":"Buford City",
+"black_total": 0.129734848,
+"gifted_total":0.032258065},
+
+{"SYSTEM_NAME":"Cherokee County",
+"black_total": 0.068900762,
+"gifted_total":0.025678383},
+
+{"SYSTEM_NAME":"Clayton County",
+"black_total": 0.718409224,
+"gifted_total":0.62745098},
+
+{"SYSTEM_NAME":"Cobb County",
+"black_total": 0.313005171,
+"gifted_total":0.122502419},
+
+{"SYSTEM_NAME":"Decatur City",
+"black_total": 0.316955017,
+"gifted_total":0.100961538},
+
+{"SYSTEM_NAME":"DeKalb County",
+"black_total": 0.705621806,
+"gifted_total":0.472248846},
+
+{"SYSTEM_NAME":"Douglas County",
+"black_total": 0.483022419,
+"gifted_total":0.308134521},
+
+{"SYSTEM_NAME":"Fayette County",
+"black_total": 0.231847317,
+"gifted_total":0.102375297},
+
+{"SYSTEM_NAME":"Forsyth County",
+"black_total": 0.02527695,
+"gifted_total":0.008435005},
+
+{"SYSTEM_NAME":"Fulton County",
+"black_total": 0.417729786,
+"gifted_total":0.155289607},
+
+{"SYSTEM_NAME":"Gwinnett County",
+"black_total": 0.288943371,
+"gifted_total":0.142556061},
+
+{"SYSTEM_NAME":"Henry County",
+"black_total": 0.458483755,
+"gifted_total":0.299421009},
+
+{"SYSTEM_NAME":"Marietta City",
+"black_total": 0.455079122,
+"gifted_total":0.202020202},
+
+{"SYSTEM_NAME":"Rockdale County",
+"black_total": 0.600812359,
+"gifted_total":0.418243243},
+
+]
+
+var data_2012 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.779412991,
+"gifted_total":0.470448705},
+
+{"SYSTEM_NAME":"Buford City",
+"black_total": 0.138596491,
+"gifted_total":0.04},
+
+{"SYSTEM_NAME":"Cherokee County",
+"black_total": 0.069008451,
+"gifted_total":0.027096774},
+
+{"SYSTEM_NAME":"Clayton County",
+"black_total": 0.717138336,
+"gifted_total":0.632022472},
+
+{"SYSTEM_NAME":"Cobb County",
+"black_total": 0.312720131,
+"gifted_total":0.127187343},
+
+{"SYSTEM_NAME":"Decatur City",
+"black_total": 0.29320025,
+"gifted_total":0.105405405},
+
+{"SYSTEM_NAME":"DeKalb County",
+"black_total": 0.692291151,
+"gifted_total":0.469812109},
+
+{"SYSTEM_NAME":"Douglas County",
+"black_total": 0.488757637,
+"gifted_total":0.312584574},
+
+{"SYSTEM_NAME":"Fayette County",
+"black_total": 0.238737176,
+"gifted_total":0.10866373},
+
+{"SYSTEM_NAME":"Forsyth County",
+"black_total": 0.025786572,
+"gifted_total":0.00982375},
+
+{"SYSTEM_NAME":"Fulton County",
+"black_total": 0.416088673,
+"gifted_total":0.163682864},
+
+{"SYSTEM_NAME":"Gwinnett County",
+"black_total": 0.299899093,
+"gifted_total":0.155939801},
+
+{"SYSTEM_NAME":"Henry County",
+"black_total": 0.465394764,
+"gifted_total":0.310882731},
+
+{"SYSTEM_NAME":"Marietta City",
+"black_total": 0.444262913,
+"gifted_total":0.221467391},
+
+{"SYSTEM_NAME":"Rockdale County",
+"black_total": 0.610890756,
+"gifted_total":0.461441214},
+
+]
 
 var margin = {top: 80, right: 80, bottom: 80, left: 80},
     width = 1000 - margin.left - margin.right,
@@ -91,22 +283,26 @@ var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
 var y0 = d3.scale.linear().domain([300, 1100]).range([height, 0]),
-y1 = d3.scale.linear().domain([300, 1100]).range([height, 0]);
+    y1 = d3.scale.linear().domain([300, 1100]).range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
 
+var formatter = d3.format(".0%");    
+
 // create left yAxis
-var yAxisLeft = d3.svg.axis().scale(y0).ticks(4).orient("left");
+var yAxisLeft = d3.svg.axis().scale(y0).ticks(5).tickFormat(formatter).orient("left");
 // create right yAxis
-var yAxisRight = d3.svg.axis().scale(y1).ticks(4).orient("right");
+var yAxisRight = d3.svg.axis().scale(y1).ticks(5).tickFormat(formatter).orient("right");
+
+
 
 var tip = d3.tip()
           .attr("class","d3-tip")
           .offset([-10,0])
           .html(function(d){
-            return "<span style = 'color:white'>" + d.gifted_total + "</span>";
+            return "<span style = 'color:white'> Percentage of BGS:" + formatter(d.gifted_total) + "</span>";
           });
 
 
@@ -114,43 +310,48 @@ var tip1 = d3.tip()
           .attr("class","d3-tip")
           .offset([-10,0])
           .html(function(d){
-            return "<span style = 'color:white'>" + d.black_total + "</span>";
+            return "<span style = 'color:white'> Percentage of BTS:" + formatter(d.black_total) + "</span>";
           });
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("class", "graph")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-svg.call(tip);
-svg.call(tip1);    
+    svg.call(tip);
+    svg.call(tip1);    
 
-
-
-d3.tsv("Test_2010.tsv",type,function(error, data) {
-  x.domain(data.map(function(d) { return d.SYSTEM_NAME; }));
-  y0.domain([0, 1]);
+  x.domain(data_2010.map(function(d) { return d.SYSTEM_NAME; }));
+  y0.domain([0, 0.9]);
   y1.domain([0, 1]);
 
+
   svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+     .attr("class", "x axis")
+     .attr("transform", "translate(0," + height + ")")
+     .call(xAxis)
+     .selectAll("text")
+        .style("text-anchor","end")
+        .attr("dx","-.4em")
+        .attr("dy",".15em")
+        .attr("transform",function(d){
+          return "rotate(-30)"
+        });
 
   svg.append("g")
     .attr("class", "y axis axisLeft")
     .attr("transform", "translate(0,0)")
     .call(yAxisLeft)
   .append("text")
+    .attr("transform","rotate(-90)")
     .attr("y", 6)
-    .attr("dy", "-2em")
-    .style("text-anchor", "end")
+    .attr("dy", ".71em")
     .style("text-anchor", "end")
     .text("Percentage");
 
-svg.append("g")
+  svg.append("g")
     .attr("class", "y axis axisRight")
     .attr("transform", "translate(0,0)")
     //.call(yAxisRight)
@@ -171,9 +372,10 @@ svg.append("g")
     .style("text-anchor", "end")
     .text("#");
   */
-  bars = svg.selectAll(".rect").data(data).enter();
+var bars = svg.selectAll(".rect").data(data_2010)
   
-  bars.append("rect")
+      bars.enter()
+      .append("rect")
       .attr("class", "rect1")
       .attr("x", function(d) { return x(d.SYSTEM_NAME); })
       .attr("width", x.rangeBand()/2)
@@ -182,143 +384,149 @@ svg.append("g")
       .on('mouseover', tip.show)
       .on('mouseout',tip.hide);
 
-
-  bars.append("rect")
+var bars1 = svg.selectAll(".rect").data(data_2010)
+      
+      bars1.enter()
+      .append("rect")
       .attr("class", "rect2")
       .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
       .attr("width", x.rangeBand() / 2)
       .attr("y", function(d) { return y1(d.black_total); })
       .attr("height", function(d,i,j) { return height - y1(d.black_total); })
       .on('mouseover', tip1.show)
-      .on('mouseout',tip1.hide);      
-});
+      .on('mouseout',tip1.hide);  
 
-console.log("The append function is used!")
-
-
-//change the chart according to the time
 d3.selectAll("input").on("change",change);
 
-var timeout = setTimeout(function() {
-  d3.select("input[value=\"2010\"]").property("checked", true).each(change);
-}, 2000);
+var gap = document.getElementById("gap").value;
 
 function change(){
-  /*
-  reserve for the later 
-  */
-  clearTimeout(timeout);
+
   if (this.value === "2010") transition_2010();
   if (this.value === "2011") transition_2011();
-  //else transitionStacked();
+  if (this.value === "2012") transition_2012();
+  if (this.value === "2013") gap_2010();
+  //if (gap === "gap") gap_2010();
+  console.log(gap);
 }
 
 function transition_2011(){
-  d3.tsv("Test_2011.tsv",type,function(error, data_2011) {
-  x.domain(data_2011.map(function(d) { return d.SYSTEM_NAME; }));
-  y0.domain([0, 1]);
-  y1.domain([0, 1]); 
-  //var svg = d3.select("body").transition();
-
-
-
-  bars = svg.selectAll(".rect").data(data_2011).enter();
   
-  bars.append("rect")
-      .attr("class", "rect1")
-      //.transition()
-      //.delay(function(d, i) { return i * 10; })
-      .attr("x", function(d) { return x(d.SYSTEM_NAME); })
-      .attr("width", x.rangeBand()/2)
+  bars.data(data_2011)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
+  console.log("does it really do the select things?")
+
+  bars.transition() 
+      .duration(100)
+      .delay(function(d,i){return i*10;})
+      .ease("ease")   
+      .attr("x", function(d) { return  x(d.SYSTEM_NAME); })
+      .attr("width", x.rangeBand() / 2)
       .attr("y", function(d) { return y0(d.gifted_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.gifted_total); })
-      .on('mouseover', tip.show)
-      .on('mouseout',tip.hide);
+      .attr("height", function(d,i,j) { return height - y0(d.gifted_total); });
+  
+  bars1.data(data_2011)
+      .enter()
+      .append("rect")
 
-
-  bars.append("rect")
-      .attr("class", "rect2")
+  bars1.transition() 
+      .duration(100)
+      .delay(function(d,i){return i*10;})
+      .ease("ease")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
       .attr("width", x.rangeBand() / 2)
-      .attr("y", function(d) { return y1(d.black_total); })
-      .attr("height", function(d,i,j) { return height - y1(d.black_total); })
-      .on('mouseover', tip1.show)
-      .on('mouseout',tip1.hide);      
+      .attr("y", function(d) { return y0(d.black_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); });   
 
-
-  });
   console.log("why not appear 2011?");
 }
 
 function transition_2010(){
-  d3.tsv("Test_2010.tsv",type,function(error, data_2010) {
-  x.domain(data_2010.map(function(d) { return d.SYSTEM_NAME; }));
-  y0.domain([0, 1]);
-  y1.domain([0, 1]); 
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+  bars.data(data_2010)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
 
-  svg.append("g")
-    .attr("class", "y axis axisLeft")
-    .attr("transform", "translate(0,0)")
-    .call(yAxisLeft)
-  .append("text")
-    .attr("y", 6)
-    .attr("dy", "-2em")
-    .style("text-anchor", "end")
-    .style("text-anchor", "end")
-    .text("Percentage");
-
-svg.append("g")
-    .attr("class", "y axis axisRight")
-    .attr("transform", "translate(0,0)")
-    //.call(yAxisRight)
-  .append("text")
-    .attr("y", 6)
-    .attr("dy", "-2em")
-    .style("text-anchor", "end")
-    .style("text-anchor", "end");
-
-  bars = svg.selectAll(".rect").data(data_2010).enter();
-
-
-
-  
-  
-  bars.append("rect")
-      .attr("class", "rect1")
-      .attr("x", function(d) { return x(d.SYSTEM_NAME); })
-      .attr("width", x.rangeBand()/2)
+  bars.transition() 
+      .duration(100)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 2)
       .attr("y", function(d) { return y0(d.gifted_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.gifted_total); })
-      .on('mouseover', tip.show)
-      .on('mouseout',tip.hide);
+      .attr("height", function(d,i,j) { return height - y0(d.gifted_total); });
   
+  bars1.data(data_2010)
+      .enter()
+      .append("rect")
 
-  bars.append("rect")
-      .attr("class", "rect2")
+  bars1.transition() 
+      .duration(100)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
       .attr("width", x.rangeBand() / 2)
-      .attr("y", function(d) { return y1(d.black_total); })
-      .attr("height", function(d,i,j) { return height - y1(d.black_total); })
-      .on('mouseover', tip1.show)
-      .on('mouseout',tip1.hide);      
-
-
-  });
-  console.log("why not appear 2010?");
+      .attr("y", function(d) { return y0(d.black_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
+  
 }
 
-function type(d) {
-  d.gifted_total = + d.gifted_total;
-  //d.black_total = +d.black_total;
-  //d.school_total_percentage_black_served = +d.school_total_percentage_black_served;
-  return d;
-  console.log("function type is used");
+function transition_2012(){
+
+  bars.data(data_2012)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
+  bars.transition() 
+      .duration(100)
+      .ease("quad")
+      .delay(function(d,i){return i*10;})   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.gifted_total); });
+  
+  bars1.data(data_2012)
+      .enter()
+      .append("rect")
+
+  bars1.transition() 
+      .duration(100)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(d.black_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
+  
 }
+
+function gap_2010(){
+  bars.transition() 
+      .duration(100)
+      .ease("ease")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 1.5)
+      .attr("y", function(d) { return y0(0); })
+      .attr("height", function(d,i,j) { return height - y0(0); });
+  
+  bars1.transition() 
+      .duration(100)
+      .delay(function(d,i){return i*10;})
+      .ease("ease")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/4 ; })
+      .attr("width", x.rangeBand()/ 1.5 )
+      .attr("y", function(d) { return y0(d.black_total - d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total - d.gifted_total); });
+
+}
+
+
 
 </script>
 

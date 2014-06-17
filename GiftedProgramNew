@@ -3,7 +3,7 @@
 <style>
 
 body {
-  font: 10px sans-serif;
+  font: 12px sans-serif;
 }
 
 .y.axisRight text {
@@ -37,10 +37,11 @@ body {
   font-size: 10px;
   width: 100%;
   line-height: 1;
-  color: steelblue;
+  color: black;
   content:"\25BC";
   position: absolute;
   text-align: center;
+
 }
 
 /* Style northward tooltips differently */
@@ -48,14 +49,15 @@ body {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
+
 }
 
 .rect1 {
-  fill: #98abc5;
+  fill: #aad;
 }
 
-.rect2 {
-  fill: #8a89a6;
+.rect2{
+  fill: #556;
 }
 
 .x.axis path {
@@ -79,7 +81,7 @@ form {
   <label><input type="radio" name="mode" value="2011" > 2011</label>
   <label><input type="radio" name="mode" value="2012" > 2012</label>
   <label><input type="radio" name="mode" value="2013" > 2013</label>
-  <label><input type = "button" name="mode" id ="gap" value="gap"></label>
+  <input onclick = "ButtonChange(this)" type = "button" id ="GapButton" value="Comparison of percentages"></input>
 </form>
 <script>
 
@@ -275,6 +277,69 @@ var data_2012 = [
 
 ]
 
+var data_2013 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.766883985,
+"gifted_total":0.443494777},
+
+{"SYSTEM_NAME":"Buford City",
+"black_total": 0.129689175,
+"gifted_total":0.049180328},
+
+{"SYSTEM_NAME":"Cherokee County",
+"black_total": 0.068999635,
+"gifted_total":0.02993688},
+
+{"SYSTEM_NAME":"Clayton County",
+"black_total": 0.710796635,
+"gifted_total":0.632475661},
+
+{"SYSTEM_NAME":"Cobb County",
+"black_total": 0.314394928,
+"gifted_total":0.129884671},
+
+{"SYSTEM_NAME":"Decatur City",
+"black_total": 0.279812724,
+"gifted_total":0.107448107},
+
+{"SYSTEM_NAME":"DeKalb County",
+"black_total": 0.679320912,
+"gifted_total":0.456027386},
+
+{"SYSTEM_NAME":"Douglas County",
+"black_total": 0.499399568,
+"gifted_total":0.327403015},
+
+{"SYSTEM_NAME":"Fayette County",
+"black_total": 0.2452,
+"gifted_total":0.117972129},
+
+{"SYSTEM_NAME":"Forsyth County",
+"black_total": 0.02717293,
+"gifted_total":0.011257818},
+
+{"SYSTEM_NAME":"Fulton County",
+"black_total": 0.420213813,
+"gifted_total":0.168164105},
+
+{"SYSTEM_NAME":"Gwinnett County",
+"black_total": 0.303921988,
+"gifted_total":0.16323763},
+
+{"SYSTEM_NAME":"Henry County",
+"black_total": 0.475021468,
+"gifted_total":0.311451226},
+
+{"SYSTEM_NAME":"Marietta City",
+"black_total": 0.435947158,
+"gifted_total":0.223325062},
+
+{"SYSTEM_NAME":"Rockdale County",
+"black_total": 0.620303492,
+"gifted_total":0.476334951},
+
+]
+
 var margin = {top: 80, right: 80, bottom: 80, left: 80},
     width = 1000 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -302,7 +367,7 @@ var tip = d3.tip()
           .attr("class","d3-tip")
           .offset([-10,0])
           .html(function(d){
-            return "<span style = 'color:white'> Percentage of BGS:" + formatter(d.gifted_total) + "</span>";
+            return "<span style = 'color:white'> Percentage: " + formatter(d.gifted_total) + "</span>";
           });
 
 
@@ -310,8 +375,15 @@ var tip1 = d3.tip()
           .attr("class","d3-tip")
           .offset([-10,0])
           .html(function(d){
-            return "<span style = 'color:white'> Percentage of BTS:" + formatter(d.black_total) + "</span>";
+            return "<span style = 'color:white'> Percentage: " + formatter(d.black_total) + "</span>";
           });
+
+var tip2 = d3.tip()
+          .attr("class","d3-tip")
+          .offset([-10,0])
+          .html(function(d){
+            return "<span style = 'color:white'> Percentage: " + formatter(d.black_total - d.gifted_total) + "</span>";
+          });          
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -325,7 +397,7 @@ var svg = d3.select("body").append("svg")
 
   x.domain(data_2010.map(function(d) { return d.SYSTEM_NAME; }));
   y0.domain([0, 0.9]);
-  y1.domain([0, 1]);
+  y1.domain([0, 0.9]);
 
 
   svg.append("g")
@@ -372,6 +444,50 @@ var svg = d3.select("body").append("svg")
     .style("text-anchor", "end")
     .text("#");
   */
+var LegendColor= [ ["percentage of black students in gifted program","#aad"],
+                   ["percentage of black students in the school systems","#556"]];
+
+var legend = svg.append("g")
+    .attr("class", "legend")
+    //.attr("x", width - 65)
+    .attr("y", 50)
+    .attr("height", 200)
+    .attr("width", 300)
+    .attr('transform', 'translate(-20,50)');
+
+var legendRect = legend.selectAll('rect').data(LegendColor);  
+
+legendRect.enter()
+    .append("rect")
+    .attr("x", width - 200)
+    .attr("y", height)
+    .attr("width", 20)
+    .attr("height", 20);
+
+legendRect
+    .attr("y", function(d, i) {
+        return i * 20;
+    })
+    .style("fill", function(d) {
+        return d[1];
+    });
+
+var legendText = legend.selectAll('text').data(LegendColor);
+
+legendText.enter()
+    .append("text")
+    .attr("x", width - 175);
+
+legendText
+    .attr("y", function(d, i) {
+        return i * 20 + 15;
+    })
+    .text(function(d) {
+        return d[0];
+    });
+             
+
+
 var bars = svg.selectAll(".rect").data(data_2010)
   
       bars.enter()
@@ -398,17 +514,64 @@ var bars1 = svg.selectAll(".rect").data(data_2010)
 
 d3.selectAll("input").on("change",change);
 
-var gap = document.getElementById("gap").value;
+
+
+var gap = "See the gap";
+console.log("The current value of the button change" + gap);
+
+var year = 2010;
 
 function change(){
+  console.log("The value of gap in change () " + gap);
+  if (gap == "Comparison of percentages")
+  {
 
-  if (this.value === "2010") transition_2010();
-  if (this.value === "2011") transition_2011();
-  if (this.value === "2012") transition_2012();
-  if (this.value === "2013") gap_2010();
-  //if (gap === "gap") gap_2010();
-  console.log(gap);
+    if (this.value === "2010") {gap_2010(); year  = 2010;}
+    if (this.value === "2011") {gap_2011(); year  = 2011;}
+    if (this.value === "2012") {gap_2012(); year  = 2012;}
+    if (this.value === "2013") {gap_2013(); year  = 2013;}
+  }
+  else{
+    
+    if (this.value === "2010") {transition_2010();year  = 2010;}
+    if (this.value === "2011") {transition_2011();year  = 2011;}
+    if (this.value === "2012") {transition_2012();year  = 2012;}
+    if (this.value === "2013") {transition_2013();year  = 2013;}
+
+  }
+  
+  
+  //console.log(gap);
 }
+
+function ButtonChange(bt){
+   console.log(bt.value);
+   if (bt.value == "Comparison of percentages"){ 
+   bt.value ="See the gap";
+   gap = "See the gap";
+ }
+   else {
+
+    bt.value = "Comparison of percentages";
+    gap = "Comparison of percentages";
+  }
+   if (bt.value == "Comparison of percentages") {
+
+    if (year == "2010") gap_2010();
+    if (year == "2011") gap_2011();
+    if (year == "2012") gap_2012();
+    if (year == "2013") gap_2013();
+  }
+   else {
+    if (year == "2010") transition_2010();
+    if (year == "2011") transition_2011();
+    if (year == "2012") transition_2012();
+    if (year == "2013") transition_2013();
+  }
+  console.log("This.value is from the ButtonChange" + year);
+}
+
+
 
 function transition_2011(){
   
@@ -420,9 +583,9 @@ function transition_2011(){
   console.log("does it really do the select things?")
 
   bars.transition() 
-      .duration(100)
+      .duration(1000)
       .delay(function(d,i){return i*10;})
-      .ease("ease")   
+      .ease("quad")   
       .attr("x", function(d) { return  x(d.SYSTEM_NAME); })
       .attr("width", x.rangeBand() / 2)
       .attr("y", function(d) { return y0(d.gifted_total); })
@@ -433,9 +596,9 @@ function transition_2011(){
       .append("rect")
 
   bars1.transition() 
-      .duration(100)
+      .duration(1000)
       .delay(function(d,i){return i*10;})
-      .ease("ease")   
+      .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
       .attr("width", x.rangeBand() / 2)
       .attr("y", function(d) { return y0(d.black_total); })
@@ -452,7 +615,7 @@ function transition_2010(){
       .attr("class", "rect1");
 
   bars.transition() 
-      .duration(100)
+      .duration(1000)
       .delay(function(d,i){return i*10;})
       .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
@@ -465,7 +628,7 @@ function transition_2010(){
       .append("rect")
 
   bars1.transition() 
-      .duration(100)
+      .duration(1000)
       .delay(function(d,i){return i*10;})
       .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
@@ -483,7 +646,7 @@ function transition_2012(){
       .attr("class", "rect1");
 
   bars.transition() 
-      .duration(100)
+      .duration(1000)
       .ease("quad")
       .delay(function(d,i){return i*10;})   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
@@ -496,7 +659,38 @@ function transition_2012(){
       .append("rect")
 
   bars1.transition() 
-      .duration(100)
+      .duration(1000)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(d.black_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
+  
+}
+
+function transition_2013(){
+
+  bars.data(data_2013)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
+  bars.transition() 
+      .duration(1000)
+      .ease("quad")
+      .delay(function(d,i){return i*10;})   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.gifted_total); });
+  
+  bars1.data(data_2013)
+      .enter()
+      .append("rect")
+
+  bars1.transition() 
+      .duration(1000)
       .delay(function(d,i){return i*10;})
       .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/2; })
@@ -507,22 +701,129 @@ function transition_2012(){
 }
 
 function gap_2010(){
+  
+  bars.exit()
+      .remove();
+
+  bars.data(data_2010)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
   bars.transition() 
-      .duration(100)
-      .ease("ease")   
+      .duration(1000)
+      .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand() / 1.5)
+      .attr("width", x.rangeBand()/ 2  )
       .attr("y", function(d) { return y0(0); })
       .attr("height", function(d,i,j) { return height - y0(0); });
   
+  bars1.data(data_2010)
+      .enter()
+      .append("rect")
+      .on('mouseover', tip.show)
+      .on('mouseout',tip.hide);
+
   bars1.transition() 
-      .duration(100)
+      .duration(1000)
       .delay(function(d,i){return i*10;})
-      .ease("ease")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) + x.rangeBand()/4 ; })
-      .attr("width", x.rangeBand()/ 1.5 )
-      .attr("y", function(d) { return y0(d.black_total - d.gifted_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.black_total - d.gifted_total); });
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME)  ; })
+      .attr("width", x.rangeBand() )
+      .attr("y", function(d) { return y0(d.black_total = d.black_total- d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
+
+
+}
+
+function gap_2011(){
+  bars.data(data_2011)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
+  bars.transition() 
+      .duration(1000)
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(0); })
+      .attr("height", function(d,i,j) { return height - y0(0); });
+  
+  bars1.data(data_2011)
+      .enter()
+      .append("rect")
+
+  bars1.transition() 
+      .duration(1000)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME)  ; })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y0(d.black_total = d.black_total - d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); })
+      .on('mouseover', tip2.show)
+      .on('mouseout',tip2.hide);
+}
+
+function gap_2012(){
+  bars.data(data_2012)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
+  bars.transition() 
+      .duration(1000)
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(0); })
+      .attr("height", function(d,i,j) { return height - y0(0); })
+
+  
+  bars1.data(data_2012)
+      .enter()
+      .append("rect")
+
+  bars1.transition() 
+      .duration(1000)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() )
+      .attr("y", function(d) { return y0(d.black_total = d.black_total - d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); })
+      .on('mouseover', tip2.show)
+      .on('mouseout',tip2.hide);
+}
+
+function gap_2013(){
+  bars.data(data_2013)
+      .enter()
+      .append("rect")
+      .attr("class", "rect1");
+
+  bars.transition() 
+      .duration(1000)
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() / 2)
+      .attr("y", function(d) { return y0(0); })
+      .attr("height", function(d,i,j) { return height - y0(0); })
+
+  
+  bars1.data(data_2013)
+      .enter()
+      .append("rect")
+
+  bars1.transition() 
+      .duration(1000)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")   
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
+      .attr("width", x.rangeBand() )
+      .attr("y", function(d) { return y0(d.black_total = d.black_total - d.gifted_total); })
+      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
 
 }
 

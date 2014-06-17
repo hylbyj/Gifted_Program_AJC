@@ -1,0 +1,125 @@
+var data_2010 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 0.807776109,
+"gifted_total":0.521075581},
+
+]
+
+var data_2011 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"black_total": 1,
+"gifted_total":0.5},
+
+]

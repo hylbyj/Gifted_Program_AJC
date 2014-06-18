@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang = "en-us">
+  <head>
+  	<meta charset="UTF-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  	<title>
+  		Gifted Program
+  	</title>
+
+  	<link rel="stylesheet" href="graph.css">
+  	<script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+  
+
+  </head>
+  <body>
+  	<header class="masthead">
+    <h1>Gifted Program in Atlanta</h1>
+    </header>
+
+    <div class = "container">
+    <h3>Innteractive Graph of Black Students</h3>
+    
+    
+    <label><input type="radio" name="mode" value="2010" checked > 2010</label> 
+    <label><input type="radio" name="mode" value="2011" > 2011</label>
+    <label><input type="radio" name="mode" value="2012" > 2012</label>
+    <label><input type="radio" name="mode" value="2013" > 2013</label>
+    <input onclick = "ButtonChange(this)" type = "button" id ="GapButton" value="Comparison of percentages"></input>
+    <p>Hover on the bars to see the exact frequency, click on the different years to explore more</p>
+    <script type="text/javascript" src="DataBlack.json"></script>
+    <script type="text/javascript" src="interactivegraphblack.js"></script>
+
+    </div>	
+
+
+
+
+  </body>	
+
+
+
+
+</html>

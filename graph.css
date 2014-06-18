@@ -1,0 +1,67 @@
+body {
+  font: 12px sans-serif;
+}
+
+.y.axisRight text {
+    fill: orange;
+}
+
+.y.axisLeft text {
+    fill: black;
+}
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.d3-tip{
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: #000;
+  color: steelblue;
+  border-radius: 2px;
+}
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: black;
+  content:"\25BC";
+  position: absolute;
+  text-align: center;
+
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+
+}
+
+.rect1 {
+  fill: #aad;
+}
+
+.rect2{
+  fill: #556;
+}
+
+.x.axis path {
+  display: none;
+}
+
+form {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}

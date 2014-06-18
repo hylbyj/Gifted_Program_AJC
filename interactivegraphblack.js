@@ -1,411 +1,3 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font: 12px sans-serif;
-}
-
-.y.axisRight text {
-    fill: orange;
-}
-
-.y.axisLeft text {
-    fill: black;
-}
-
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.d3-tip{
-  line-height: 1;
-  font-weight: bold;
-  padding: 12px;
-  background: #000;
-  color: steelblue;
-  border-radius: 2px;
-}
-
-.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: black;
-  content:"\25BC";
-  position: absolute;
-  text-align: center;
-
-}
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
-
-}
-
-.rect1 {
-  fill: #aad;
-}
-
-.rect2{
-  fill: #556;
-}
-
-.x.axis path {
-  display: none;
-}
-
-form {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-}
-
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-
-<form>
-  <label><input type="radio" name="mode" value="2010" checked > 2010</label> 
-  <label><input type="radio" name="mode" value="2011" > 2011</label>
-  <label><input type="radio" name="mode" value="2012" > 2012</label>
-  <label><input type="radio" name="mode" value="2013" > 2013</label>
-  <input onclick = "ButtonChange(this)" type = "button" id ="GapButton" value="Comparison of percentages"></input>
-</form>
-<script>
-
-var data_2010 = [
-{"SYSTEM_NAME":"Atlanta Public Schools",
-"black_total": 0.807776109,
-"gifted_total":0.521075581,
-"black_gap":0.286700528},
-
-{"SYSTEM_NAME":"Buford City",
-"black_total": 0.138528139,
-"gifted_total":0.025568182,
-"black_gap":0.286700528},
-
-{"SYSTEM_NAME":"Cherokee County",
-"black_total": 0.069355356,
-"gifted_total":0.025225225,
-"black_gap":0.286700528},
-
-{"SYSTEM_NAME":"Clayton County",
-"black_total": 0.721180996,
-"gifted_total":0.641369048},
-
-{"SYSTEM_NAME":"Cobb County",
-"black_total": 0.31152851,
-"gifted_total":0.115574436},
-
-{"SYSTEM_NAME":"Decatur City",
-"black_total": 0.339034588,
-"gifted_total":0.095818815},
-
-{"SYSTEM_NAME":"DeKalb County",
-"black_total": 0.721604578,
-"gifted_total":0.475733634},
-
-{"SYSTEM_NAME":"Douglas County",
-"black_total": 0.475266378,
-"gifted_total":0.31161025},
-
-{"SYSTEM_NAME":"Fayette County",
-"black_total": 0.227673367,
-"gifted_total":0.09950361},
-
-{"SYSTEM_NAME":"Forsyth County",
-"black_total": 0.024195919,
-"gifted_total":0.008933086},
-
-{"SYSTEM_NAME":"Fulton County",
-"black_total": 0.418474298,
-"gifted_total":0.150644142},
-
-{"SYSTEM_NAME":"Gwinnett County",
-"black_total": 0.279337524,
-"gifted_total":0.132466604},
-
-{"SYSTEM_NAME":"Henry County",
-"black_total": 0.450703526,
-"gifted_total":0.271347678},
-
-{"SYSTEM_NAME":"Marietta City",
-"black_total": 0.452160085,
-"gifted_total":0.208504801},
-
-{"SYSTEM_NAME":"Rockdale County",
-"black_total": 0.587196614,
-"gifted_total":0.374331551},
-
-]
-
-var data_2011 = [
-{"SYSTEM_NAME":"Atlanta Public Schools",
-"black_total": 0.793406229,
-"gifted_total":0.512226239},
-
-{"SYSTEM_NAME":"Buford City",
-"black_total": 0.129734848,
-"gifted_total":0.032258065},
-
-{"SYSTEM_NAME":"Cherokee County",
-"black_total": 0.068900762,
-"gifted_total":0.025678383},
-
-{"SYSTEM_NAME":"Clayton County",
-"black_total": 0.718409224,
-"gifted_total":0.62745098},
-
-{"SYSTEM_NAME":"Cobb County",
-"black_total": 0.313005171,
-"gifted_total":0.122502419},
-
-{"SYSTEM_NAME":"Decatur City",
-"black_total": 0.316955017,
-"gifted_total":0.100961538},
-
-{"SYSTEM_NAME":"DeKalb County",
-"black_total": 0.705621806,
-"gifted_total":0.472248846},
-
-{"SYSTEM_NAME":"Douglas County",
-"black_total": 0.483022419,
-"gifted_total":0.308134521},
-
-{"SYSTEM_NAME":"Fayette County",
-"black_total": 0.231847317,
-"gifted_total":0.102375297},
-
-{"SYSTEM_NAME":"Forsyth County",
-"black_total": 0.02527695,
-"gifted_total":0.008435005},
-
-{"SYSTEM_NAME":"Fulton County",
-"black_total": 0.417729786,
-"gifted_total":0.155289607},
-
-{"SYSTEM_NAME":"Gwinnett County",
-"black_total": 0.288943371,
-"gifted_total":0.142556061},
-
-{"SYSTEM_NAME":"Henry County",
-"black_total": 0.458483755,
-"gifted_total":0.299421009},
-
-{"SYSTEM_NAME":"Marietta City",
-"black_total": 0.455079122,
-"gifted_total":0.202020202},
-
-{"SYSTEM_NAME":"Rockdale County",
-"black_total": 0.600812359,
-"gifted_total":0.418243243},
-
-]
-
-var data_2012 = [
-{"SYSTEM_NAME":"Atlanta Public Schools",
-"black_total": 0.779412991,
-"gifted_total":0.470448705},
-
-{"SYSTEM_NAME":"Buford City",
-"black_total": 0.138596491,
-"gifted_total":0.04},
-
-{"SYSTEM_NAME":"Cherokee County",
-"black_total": 0.069008451,
-"gifted_total":0.027096774},
-
-{"SYSTEM_NAME":"Clayton County",
-"black_total": 0.717138336,
-"gifted_total":0.632022472},
-
-{"SYSTEM_NAME":"Cobb County",
-"black_total": 0.312720131,
-"gifted_total":0.127187343},
-
-{"SYSTEM_NAME":"Decatur City",
-"black_total": 0.29320025,
-"gifted_total":0.105405405},
-
-{"SYSTEM_NAME":"DeKalb County",
-"black_total": 0.692291151,
-"gifted_total":0.469812109},
-
-{"SYSTEM_NAME":"Douglas County",
-"black_total": 0.488757637,
-"gifted_total":0.312584574},
-
-{"SYSTEM_NAME":"Fayette County",
-"black_total": 0.238737176,
-"gifted_total":0.10866373},
-
-{"SYSTEM_NAME":"Forsyth County",
-"black_total": 0.025786572,
-"gifted_total":0.00982375},
-
-{"SYSTEM_NAME":"Fulton County",
-"black_total": 0.416088673,
-"gifted_total":0.163682864},
-
-{"SYSTEM_NAME":"Gwinnett County",
-"black_total": 0.299899093,
-"gifted_total":0.155939801},
-
-{"SYSTEM_NAME":"Henry County",
-"black_total": 0.465394764,
-"gifted_total":0.310882731},
-
-{"SYSTEM_NAME":"Marietta City",
-"black_total": 0.444262913,
-"gifted_total":0.221467391},
-
-{"SYSTEM_NAME":"Rockdale County",
-"black_total": 0.610890756,
-"gifted_total":0.461441214},
-
-]
-
-var data_2013 = [
-{"SYSTEM_NAME":"Atlanta Public Schools",
-"black_total": 0.766883985,
-"gifted_total":0.443494777},
-
-{"SYSTEM_NAME":"Buford City",
-"black_total": 0.129689175,
-"gifted_total":0.049180328},
-
-{"SYSTEM_NAME":"Cherokee County",
-"black_total": 0.068999635,
-"gifted_total":0.02993688},
-
-{"SYSTEM_NAME":"Clayton County",
-"black_total": 0.710796635,
-"gifted_total":0.632475661},
-
-{"SYSTEM_NAME":"Cobb County",
-"black_total": 0.314394928,
-"gifted_total":0.129884671},
-
-{"SYSTEM_NAME":"Decatur City",
-"black_total": 0.279812724,
-"gifted_total":0.107448107},
-
-{"SYSTEM_NAME":"DeKalb County",
-"black_total": 0.679320912,
-"gifted_total":0.456027386},
-
-{"SYSTEM_NAME":"Douglas County",
-"black_total": 0.499399568,
-"gifted_total":0.327403015},
-
-{"SYSTEM_NAME":"Fayette County",
-"black_total": 0.2452,
-"gifted_total":0.117972129},
-
-{"SYSTEM_NAME":"Forsyth County",
-"black_total": 0.02717293,
-"gifted_total":0.011257818},
-
-{"SYSTEM_NAME":"Fulton County",
-"black_total": 0.420213813,
-"gifted_total":0.168164105},
-
-{"SYSTEM_NAME":"Gwinnett County",
-"black_total": 0.303921988,
-"gifted_total":0.16323763},
-
-{"SYSTEM_NAME":"Henry County",
-"black_total": 0.475021468,
-"gifted_total":0.311451226},
-
-{"SYSTEM_NAME":"Marietta City",
-"black_total": 0.435947158,
-"gifted_total":0.223325062},
-
-{"SYSTEM_NAME":"Rockdale County",
-"black_total": 0.620303492,
-"gifted_total":0.476334951},
-
-]
-
-var gapnumber_2010 = [
-{"SYSTEM_NAME":"Atlanta Public Schools",
-"black_total": 0.286700528,
-"gifted_total":0.521075581,
-"black_gap":0.286700528},
-
-{"SYSTEM_NAME":"Buford City",
-"black_total": 0.112959957,
-"gifted_total":0.025568182,
-"black_gap":0.286700528},
-
-{"SYSTEM_NAME":"Cherokee County",
-"black_total": 0.044130131,
-"gifted_total":0.025225225,
-"black_gap":0.286700528},
-
-{"SYSTEM_NAME":"Clayton County",
-"black_total": 0.079811948,
-"gifted_total":0.641369048},
-
-{"SYSTEM_NAME":"Cobb County",
-"black_total": 0.195954074,
-"gifted_total":0.115574436},
-
-{"SYSTEM_NAME":"Decatur City",
-"black_total": 0.243215773,
-"gifted_total":0.095818815},
-
-{"SYSTEM_NAME":"DeKalb County",
-"black_total": 0.245870944,
-"gifted_total":0.475733634},
-
-{"SYSTEM_NAME":"Douglas County",
-"black_total": 0.163656128,
-"gifted_total":0.31161025},
-
-{"SYSTEM_NAME":"Fayette County",
-"black_total": 0.128169757,
-"gifted_total":0.09950361},
-
-{"SYSTEM_NAME":"Forsyth County",
-"black_total": 0.015262833,
-"gifted_total":0.008933086},
-
-{"SYSTEM_NAME":"Fulton County",
-"black_total": 0.267830156,
-"gifted_total":0.150644142},
-
-{"SYSTEM_NAME":"Gwinnett County",
-"black_total":0.14687092,
-"gifted_total":0.132466604},
-
-{"SYSTEM_NAME":"Henry County",
-"black_total": 0.450703526,
-"gifted_total":0.271347678},
-
-{"SYSTEM_NAME":"Marietta City",
-"black_total": 0.243655284,
-"gifted_total":0.208504801},
-
-{"SYSTEM_NAME":"Rockdale County",
-"black_total": 0.212865063,
-"gifted_total":0.374331551},
-
-]
-
 var margin = {top: 80, right: 80, bottom: 80, left: 80},
     width = 1000 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -592,8 +184,8 @@ function change(){
   if (gap == "Comparison of percentages")
   {
 
-    if (this.value === "2010") {gap_2010(); year  = 2010;}
-    if (this.value === "2011") {gap_2011(); year  = 2011;}
+    if (this.value === "2010") {gap_year(gapnumber_2010); year  = 2010;}
+    if (this.value === "2011") {gap_year(gapnumber_2011);year  = 2011;}
     if (this.value === "2012") {gap_2012(); year  = 2012;}
     if (this.value === "2013") {gap_2013(); year  = 2013;}
   }
@@ -623,8 +215,8 @@ function ButtonChange(bt){
   }
    if (bt.value == "Comparison of percentages") {
 
-    if (year == "2010") gap_2010();
-    if (year == "2011") gap_2011();
+    if (year == "2010") gap_year(gapnumber_2010);
+    if (year == "2011") gap_year(gapnumber_2011);
     if (year == "2012") gap_2012();
     if (year == "2013") gap_2013();
   }
@@ -673,9 +265,9 @@ function transition(data_year){
   console.log("why not appear 2011?");
 }
 
-function gap_2010(){
+function gap_year(gapnumber_year){
   
-  bars.data(gapnumber_2010)
+  bars.data(gapnumber_year)
       .enter()
       .append("rect")
       .attr("class", "rect1");
@@ -688,7 +280,7 @@ function gap_2010(){
       .attr("y", function(d) { return y0(0); })
       .attr("height", function(d,i,j) { return height - y0(0); });
   
-  bars1.data(gapnumber_2010)
+  bars1.data(gapnumber_year)
       .enter()
       .append("rect")
       .on('mouseover', tip.show)
@@ -707,7 +299,7 @@ function gap_2010(){
 }
 
 function gap_2011(){
-  bars.data(data_2011)
+  bars.data(gapnumber_2011)
       .enter()
       .append("rect")
       .attr("class", "rect1");
@@ -720,7 +312,7 @@ function gap_2011(){
       .attr("y", function(d) { return y0(0); })
       .attr("height", function(d,i,j) { return height - y0(0); });
   
-  bars1.data(data_2011)
+  bars1.data(gapnumber_2011)
       .enter()
       .append("rect")
 
@@ -730,7 +322,7 @@ function gap_2011(){
       .ease("quad")   
       .attr("x", function(d) { return x(d.SYSTEM_NAME)  ; })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y0(d.black_total = d.black_total - d.gifted_total); })
+      .attr("y", function(d) { return y0(d.black_total); })
       .attr("height", function(d,i,j) { return height - y0(d.black_total); })
 
 }
@@ -796,8 +388,3 @@ function gap_2013(){
       .attr("height", function(d,i,j) { return height - y0(d.black_total); });
 
 }
-
-
-
-</script>
-

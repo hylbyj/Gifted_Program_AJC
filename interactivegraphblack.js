@@ -186,8 +186,8 @@ function change(){
 
     if (this.value === "2010") {gap_year(gapnumber_2010); year  = 2010;}
     if (this.value === "2011") {gap_year(gapnumber_2011);year  = 2011;}
-    if (this.value === "2012") {gap_2012(); year  = 2012;}
-    if (this.value === "2013") {gap_2013(); year  = 2013;}
+    if (this.value === "2012") {gap_year(gapnumber_2012);; year  = 2012;}
+    if (this.value === "2013") {gap_year(gapnumber_2012); year  = 2013;}
   }
   else{
     
@@ -217,7 +217,7 @@ function ButtonChange(bt){
 
     if (year == "2010") gap_year(gapnumber_2010);
     if (year == "2011") gap_year(gapnumber_2011);
-    if (year == "2012") gap_2012();
+    if (year == "2012") gap_year(gapnumber_2012);
     if (year == "2013") gap_2013();
   }
    else {
@@ -266,6 +266,10 @@ function transition(data_year){
 }
 
 function gap_year(gapnumber_year){
+
+  svg.selectAll(".legend").remove();
+
+  //put the new code of legend here!
   
   bars.data(gapnumber_year)
       .enter()
@@ -295,96 +299,5 @@ function gap_year(gapnumber_year){
       .attr("y", function(d) { return y0( d.black_total); })
       .attr("height", function(d,i,j) { return height - y0(d.black_total); });
 
-
-}
-
-function gap_2011(){
-  bars.data(gapnumber_2011)
-      .enter()
-      .append("rect")
-      .attr("class", "rect1");
-
-  bars.transition() 
-      .duration(1000)
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand() / 2)
-      .attr("y", function(d) { return y0(0); })
-      .attr("height", function(d,i,j) { return height - y0(0); });
-  
-  bars1.data(gapnumber_2011)
-      .enter()
-      .append("rect")
-
-  bars1.transition() 
-      .duration(1000)
-      .delay(function(d,i){return i*10;})
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME)  ; })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y0(d.black_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.black_total); })
-
-}
-
-function gap_2012(){
-  bars.data(data_2012)
-      .enter()
-      .append("rect")
-      .attr("class", "rect1");
-
-  bars.transition() 
-      .duration(1000)
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand() / 2)
-      .attr("y", function(d) { return y0(0); })
-      .attr("height", function(d,i,j) { return height - y0(0); })
-
-  
-  bars1.data(data_2012)
-      .enter()
-      .append("rect")
-
-  bars1.transition() 
-      .duration(1000)
-      .delay(function(d,i){return i*10;})
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand() )
-      .attr("y", function(d) { return y0(d.black_total = d.black_total - d.gifted_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.black_total); })
-      .on('mouseover', tip2.show)
-      .on('mouseout',tip2.hide);
-}
-
-function gap_2013(){
-
-  bars.data(data_2013)
-      .enter()
-      .append("rect")
-      .attr("class", "rect1");
-
-  bars.transition() 
-      .duration(1000)
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand() / 2)
-      .attr("y", function(d) { return y0(0); })
-      .attr("height", function(d,i,j) { return height - y0(0); })
-
-  
-  bars1.data(data_2013)
-      .enter()
-      .append("rect")
-
-  bars1.transition() 
-      .duration(1000)
-      .delay(function(d,i){return i*10;})
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand() )
-      .attr("y", function(d) { return y0(d.black_total = d.black_total - d.gifted_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
 
 }

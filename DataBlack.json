@@ -397,3 +397,80 @@ var gapnumber_2012 = [
 
 ]
 
+var interval_2010 = [
+{"SYSTEM_NAME":"Atlanta Public Schools",
+"upper_bound": 5.834909502,
+"lower_bound":5.203654104,
+"times":5.510249611},
+
+{"SYSTEM_NAME":"Buford City",
+"upper_bound": 15.9339619,
+"lower_bound":4.30383256,
+"times":8.281129393},
+
+{"SYSTEM_NAME":"Cherokee County",
+"upper_bound": 3.816209564,
+"lower_bound":2.702915445,
+"times":3.211680522},
+
+{"SYSTEM_NAME":"Clayton County",
+"upper_bound": 2.431291226,
+"lower_bound":1.827811854,
+"times":2.108066158},
+
+{"SYSTEM_NAME":"Cobb County",
+"upper_bound": 4.491294872,
+"lower_bound":4.088008915,
+"times":4.284909973},
+
+{"SYSTEM_NAME":"Decatur City",
+"upper_bound": 6.725308494,
+"lower_bound":3.944019499,
+"times":5.510249611},
+
+{"SYSTEM_NAME":"DeKalb County",
+"upper_bound": 5.470417268,
+"lower_bound":5.089194854,
+"times":5.276364222},
+
+{"SYSTEM_NAME":"Douglas County",
+"upper_bound": 2.488528539,
+"lower_bound":2.149693534,
+"times":2.312914548},
+
+{"SYSTEM_NAME":"Fayette County",
+"upper_bound": 3.172238068,
+"lower_bound":2.629547661,
+"times":2.88817437},
+
+{"SYSTEM_NAME":"Forsyth County",
+"upper_bound": 3.769727476,
+"lower_bound":2.233841754,
+"times":2.901891562},
+
+{"SYSTEM_NAME":"Fulton County",
+"upper_bound": 4.899132489,
+"lower_bound":4.509465745,
+"times":4.700262773},
+
+{"SYSTEM_NAME":"Gwinnett County",
+"upper_bound": 3.687898656,
+"lower_bound":3.417956939,
+"times":3.550363193},
+
+{"SYSTEM_NAME":"Henry County",
+"upper_bound": 2.561398438,
+"lower_bound":2.248741448,
+"times":2.399983924},
+
+{"SYSTEM_NAME":"Marietta City",
+"upper_bound": 7.705031893,
+"lower_bound":5.432391476,
+"times":6.469679249},
+
+{"SYSTEM_NAME":"Rockdale County",
+"upper_bound":3.527039761,
+"lower_bound":2.873792006,
+"times":3.183705179},
+
+]

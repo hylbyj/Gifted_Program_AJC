@@ -47,14 +47,25 @@ body {
   left: 0;
 
 }
+.rect3{
+  fill:black;
+}
 
 .rect1 {
   fill: #aad;
 }
 
 .rect2{
+
   fill: #556;
 }
+
+.rect4{
+  color: gray;
+  opacity: 0.4;
+  float:bottom;
+}
+
 
 .x.axis path {
   display: none;

@@ -184,7 +184,7 @@ function change(){
   if (gap == "Comparison of percentages")
   {
 
-    if (this.value === "2010") {gap_year(gapnumber_2010); year  = 2010;}
+    if (this.value === "2010") {gap_year(interval_2010); year  = 2010;}
     if (this.value === "2011") {gap_year(gapnumber_2011);year  = 2011;}
     if (this.value === "2012") {gap_year(gapnumber_2012);; year  = 2012;}
     if (this.value === "2013") {gap_year(gapnumber_2012); year  = 2013;}
@@ -215,7 +215,7 @@ function ButtonChange(bt){
   }
    if (bt.value == "Comparison of percentages") {
 
-    if (year == "2010") gap_year(gapnumber_2010);
+    if (year == "2010") gap_year(interval_2010);
     if (year == "2011") gap_year(gapnumber_2011);
     if (year == "2012") gap_year(gapnumber_2012);
     if (year == "2013") gap_2013();
@@ -232,6 +232,8 @@ function ButtonChange(bt){
 
 
 function transition(data_year){
+  
+
   
   bars.data(data_year)
       .enter()
@@ -266,38 +268,53 @@ function transition(data_year){
 }
 
 function gap_year(gapnumber_year){
+  //rescale the yaxis
+  y0.domain([0, 16]);
+  
+  yAxisLeft = d3.svg.axis().scale(y0).ticks(6).orient("left");
+  
+  svg.select(".y.axis")
+     .transition().duration(1500).ease("sin-in-out")
+     .call(yAxisLeft)
 
   svg.selectAll(".legend").remove();
 
   //put the new code of legend here!
-  
-  bars.data(gapnumber_year)
+   bars.data(gapnumber_year)
       .enter()
       .append("rect")
       .attr("class", "rect1");
 
   bars.transition() 
-      .duration(1000)
-      .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME) ; })
-      .attr("width", x.rangeBand()/ 2  )
-      .attr("y", function(d) { return y0(0); })
-      .attr("height", function(d,i,j) { return height - y0(0); });
-  
+      .duration(1002)
+      .delay(function(d,i){return i*10;})
+      .ease("quad")  
+      .attr("x", function(d) { return x(d.SYSTEM_NAME)  ; })
+      .attr("width", x.rangeBand() )
+      .attr("y", function(d,i,j) { return y0( d.upper_bound ) ; })
+      .attr("height", function(d,i,j) { return y0( d.lower_bound ) -  y0(d.upper_bound) ; });
+
+
+
   bars1.data(gapnumber_year)
       .enter()
       .append("rect")
-      .on('mouseover', tip.show)
-      .on('mouseout',tip.hide);
+      .attr("class", "rect1");
 
   bars1.transition() 
       .duration(1000)
       .delay(function(d,i){return i*10;})
       .ease("quad")   
-      .attr("x", function(d) { return x(d.SYSTEM_NAME)  ; })
-      .attr("width", x.rangeBand() )
-      .attr("y", function(d) { return y0( d.black_total); })
-      .attr("height", function(d,i,j) { return height - y0(d.black_total); });
+      .attr("x", function(d) { return x(d.SYSTEM_NAME) -3 ; })
+      .attr("width", x.rangeBand() + 6)
+      .attr("y", function(d,i,j) { return y0(d.times); })
+      .attr("height", 3);
+  
+ 
+  
+  
+
+  console.log("The line is drawn");
 
 
 }

@@ -10,6 +10,13 @@ body {
     fill: black;
 }
 
+.rect{
+  cursor:pointer;
+}
+
+.rect:hover{
+  opacity: 0.7
+}
 
 .axis path,
 .axis line {
@@ -52,19 +59,37 @@ body {
 }
 
 .rect1 {
+  cursor:pointer;
   fill: #aad;
 }
 
-.rect2{
+.rect1:hover {
+ opacity: 0.7
+}
 
+.rect2{
+  cursor:pointer;
   fill: #556;
 }
 
+.rect2:hover {
+ opacity: 0.7
+}
+
 .rect4{
-  color: gray;
-  opacity: 0.4;
+  color: #F0F0F0  ;
+  opacity: 0.1;
   float:bottom;
 }
+
+#GapButton{
+  cursor:pointer;
+  color: #004276;
+  font-size: 12px;
+  border: solid 1px #B2BBC2;
+  border-radius: 3px;
+}
+
 
 
 .x.axis path {

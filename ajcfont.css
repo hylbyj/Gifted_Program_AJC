@@ -1,0 +1,286 @@
+/*PUBLICO family*/
+
+	/*publico black and black italic*/
+	@font-face {
+		font-family: Publico-Black;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Black.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Publico-Black;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-BlackItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/*publico bold and bold italic */
+	@font-face {
+		font-family: Publico-Bold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Bold.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Publico-Bold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-BoldItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/*publico extra bold & extra bold italic */
+	@font-face {
+		font-family: Publico-ExtraBold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Extrabold.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Publico-ExtraBold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-ExtraboldItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/* publico roman and roman italic */
+	@font-face {
+		font-family: Publico;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Roman.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Publico;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Italic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/* publico Medium and medium italic*/
+	@font-face {
+		font-family: Publico-Medium;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Medium.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Publico-Medium;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-MediumItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/* publico light and light italic */
+	@font-face {
+		font-family: Publico-Light;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-Light.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Publico-Light;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/Publico-LightItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+	
+
+
+	/* publico text roman */
+	@font-face {
+		font-family: PublicoText;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/PublicoText-Roman.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: PublicoText;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/PublicoText-Italic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/* publico text bold */
+	@font-face {
+		font-family: PublicoText-Bold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/PublicoText-Bold.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: PublicoText-Bold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/PublicoText-BoldItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/* publico text roman */
+	@font-face {
+		font-family: PublicoText-Semibold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/PublicoText-Semibold.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: PublicoText-Semibold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Publico/PublicoText-SemiboldItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+
+/* Boomer family */
+
+	/*Boomer Condensed*/
+	/* Can use with bold weight, and italic style, both, or none */
+	@font-face {
+		font-family: BoomerCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/BoomerCond-Book.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: BoomerCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/BoomerCond-BookItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+	@font-face {
+		font-family: BoomerCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/BoomerCond-Bold.otf');
+		font-weight:bold;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: BoomerCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/BoomerCond-BoldItalic.otf');
+		font-weight:bold;
+		font-style:italic;
+	}
+
+	/*Boomer*/
+	/* Can use with bold weight, and italic style, both, or none */
+	@font-face {
+		font-family: Boomer;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/Boomer-Book.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Boomer;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/Boomer-BookItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+	@font-face {
+		font-family: Boomer;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/Boomer-Bold.otf');
+		font-weight:bold;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Boomer;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/Boomer-BoldItalic.otf');
+		font-weight:bold;
+		font-style:italic;
+	}
+
+	/*Boomer-Light*/
+	/* Can use with italic style*/
+	@font-face {
+		font-family: Boomer-Light;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/Boomer-Light.otf');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Boomer-Light;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Boomer/Boomer-LightItalic.otf');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+/* Scout family */
+
+	/* Scout Condensed */
+	/* Can use with bold weight, and italic style, both, or none */
+	@font-face {
+		font-family: ScoutCond-Black;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUTCOND-BLACK.OTF');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: ScoutCond-Black;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUNTCOND-BLACKITALIC.OTF');
+		font-weight:normal;
+		font-style:italic;
+	}
+	@font-face {
+		font-family: ScoutCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUTCOND-BOLD.OTF');
+		font-weight:bold;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: ScoutCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUNTCOND-BOLDITALIC.OTF');
+		font-weight:bold;
+		font-style:italic;
+	}
+	@font-face {
+		font-family: ScoutCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUTCOND-EXTRALIGHT.OTF');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: ScoutCond;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUTCOND-EXTRALIGHTITALIC.OTF');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+	/* scout bold */
+	@font-face {
+		font-family: Scout-Bold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUT-BOLD.OTF');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Scout-Bold;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUT-BOLDITALIC.OTF');
+		font-weight:normal;
+		font-style:italic;
+	}
+	/* scout regular */
+	@font-face {
+		font-family: Scout;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUT-REGULAR.OTF');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Scout;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUT-REGULARITALIC.OTF');
+		font-weight:normal;
+		font-style:italic;
+	}
+	/* scout light */
+	@font-face {
+		font-family: Scout-Light;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUT-LIGHT.OTF');
+		font-weight:normal;
+		font-style:normal;
+	}
+	@font-face {
+		font-family: Scout-Light;
+		src: url('http://alt.coxnewsweb.com/ajc/_newsapps/2014/fonts/Scout/SCOUT-LIGHTITALIC.OTF');
+		font-weight:normal;
+		font-style:italic;
+	}
+
+
+
+

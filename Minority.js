@@ -1,15 +1,20 @@
 var margin = {top: 80, right: 80, bottom: 80, left: 200},
-    width = 700 - margin.left - margin.right,
-    height = 800 - margin.top - margin.bottom;
+    width = 600 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
 var x0 = d3.scale.linear().domain([300, 1100]).range([0, width]),
     x1 = d3.scale.linear().domain([300, 1100]).range([0, width]);
 
 var y = d3.scale.ordinal().rangeRoundBands([0, height], .2);
 
+var formatter = d3.format(".0%");
+
 var xAxis = d3.svg.axis()
     .scale(x0)
+    .ticks(5)
+    .tickFormat(formatter)
     .orient("top");
+
 
 var yAxis = d3.svg.axis()
     .scale(y)
@@ -23,8 +28,8 @@ var svg = d3.select("body").append("svg")
     .attr("class", "graph")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    x0.domain([0,0.9]);
-    x1.domain([0,0.9]);
+    x0.domain([0,1.0]);
+    x1.domain([0,1.0]);
     y.domain(data_2010.map(function(d) { return d.SYSTEM_NAME; }));
 
 var bars3 = svg.selectAll(".rect").data(data_2010)
@@ -32,10 +37,10 @@ var bars3 = svg.selectAll(".rect").data(data_2010)
     bars3.enter()
     .append("rect")
     .attr("class", "rect4")
-    .attr("x", function(d,i,j) { return x0(0); })
+    .attr("x", function(d,i,j) { return x0(0);})
     .attr("width", function(d,i,j) { return ( width  );})
     .attr("y", function(d) { return y(d.SYSTEM_NAME); })
-    .attr("height", 0);     
+    .attr("height",  y.rangeBand()/1);     
 
 var bars = svg.selectAll(".rect").data(data_2010)
     
@@ -77,17 +82,17 @@ function change(){
   if (gap == "Comparison of percentages")
   {
 
-    if (this.value === "2010") {gap_year(interval_2010); year  = 2010;}
-    if (this.value === "2011") {gap_year(gapnumber_2011);year  = 2011;}
-    if (this.value === "2012") {gap_year(gapnumber_2012);; year  = 2012;}
-    if (this.value === "2013") {gap_year(gapnumber_2012); year  = 2013;}
+    if (this.value === "2010") {riskratio(interval_2011); year  = 2010;}
+    if (this.value === "2011") {riskratio(interval_2012);year  = 2011;}
+    if (this.value === "2012") {riskratio(interval_2013);; year  = 2012;}
+    if (this.value === "2013") {riskratio(interval_2010); year  = 2013;}
   }
   else{
     
-    if (this.value === "2010") {transition(data_2010);year  = 2010;}
-    if (this.value === "2011") {transition(data_2011);year  = 2011;}
-    if (this.value === "2012") {transition(data_2012);year  = 2012;}
-    if (this.value === "2013") {transition(data_2013);year  = 2013;}
+    if (this.value === "2010") {transition_m(data_2010);year  = 2010;}
+    if (this.value === "2011") {transition_m(data_2011);year  = 2011;}
+    if (this.value === "2012") {transition_m(data_2012);year  = 2012;}
+    if (this.value === "2013") {transition_m(data_2013);year  = 2013;}
 
   }
 
@@ -108,25 +113,25 @@ function ButtonChange(bt){
   }
    if (bt.value == "Comparison of percentages") {
 
-    if (year == "2010") gap_year(interval_2010);
-    if (year == "2011") gap_year(gapnumber_2011);
-    if (year == "2012") gap_year(gapnumber_2012);
-    if (year == "2013") gap_2013();
+    if (year == "2010") riskratio(interval_2011);
+    if (year == "2011") riskratio(interval_2012);
+    if (year == "2012") riskratio(interval_2013);
+    if (year == "2013") riskratio(interval_2010);
   }
    else {
-    if (year == "2010") transition(data_2010);
-    if (year == "2011") transition(data_2011);
-    if (year == "2012") transition(data_2012);
-    if (year == "2013") transition(data_2013);
+    if (year == "2010") transition_m(data_2010);
+    if (year == "2011") transition_m(data_2011);
+    if (year == "2012") transition_m(data_2012);
+    if (year == "2013") transition_m(data_2013);
   }
   console.log("This.value is from the ButtonChange" + year);
 }
 
 
-function transition(data_year){
+function transition_m(data_year){
   x0.domain([0, 1]);
   
-  xAxis = d3.svg.axis().scale(x0).ticks(6).orient("top");
+  xAxis = d3.svg.axis().scale(x0).ticks(5).tickFormat(formatter).orient("top");
   
   svg.select(".x.axis")
      .transition().duration(1500).ease("sin-in-out")
@@ -164,17 +169,8 @@ function transition(data_year){
   console.log("why not appear 2011?");
 }
 
-function gap_year(gapnumber_year){
+function riskratio(gapnumber_year){
 
-     var bars3 = svg.selectAll(".rect").data(gapnumber_year)
-      
-    bars3.enter()
-    .append("rect")
-    .attr("class", "rect4")
-    .attr("x", function(d,i,j) { return x0(0); })
-    .attr("width", function(d,i,j) { return ( width  );})
-    .attr("y", function(d) { return y(d.SYSTEM_NAME); })
-    .attr("height", y.rangeBand()/1); 
   //rescale the yaxis
   x0.domain([0, 16]);
   
@@ -184,19 +180,6 @@ function gap_year(gapnumber_year){
      .transition().duration(1500).ease("sin-in-out")
      .call(xAxis)
 
-  bars3.data(gapnumber_year)
-       .enter()
-       .append("rect")
-       .attr("class", "rect4")
-      
-bars3.transition() 
-      .duration(1000)
-      .delay(function(d,i){return i*10;})
-      .ease("quad") 
-    .attr("x", function(d,i,j) { return x0(0); })
-    .attr("width", function(d,i,j) { return ( width  );})
-    .attr("y", function(d) { return y(d.SYSTEM_NAME); })
-    .attr("height", y.rangeBand()/1); 
   //put the new code of legend here!
    bars.data(gapnumber_year)
       .enter()
@@ -207,7 +190,6 @@ bars3.transition()
       .duration(1002)
       .delay(function(d,i){return i*10;})
       .ease("quad")  
-      .sort(function(a,b) {return a.times - b.times;})
       .attr("x", function(d,i,j) { return x0(d.lower_bound)  ; })
       .attr("width", function(d,i,j) { return ( x0(d.upper_bound) - x0(d.lower_bound) );})
       .attr("y", function(d) { return y(d.SYSTEM_NAME)  ; })
@@ -224,16 +206,11 @@ bars3.transition()
       .duration(1000)
       .delay(function(d,i){return i*10;})
       .ease("quad")   
-      .sort(function(a,b) {return a.times - b.times;})
       .attr("x", function(d,i,j) { return x0(d.times); })
       .attr("width", 3)
       .attr("y", function(d,i,j) { return y(d.SYSTEM_NAME) -3; })
       .attr("height", y.rangeBand()/1 + 6);
   
-
-  
-  
-
   console.log("The line is drawn");
 
 
